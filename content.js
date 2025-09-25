@@ -2,7 +2,6 @@
 // Injects the UI, detects posts, extracts text and author info, and communicates with the backend.
 
 const BACKEND_URL = "http://localhost:3000/generate-comments"; // change to your deployed backend
-console.log("🚀 ~ BACKEND_URL:", BACKEND_URL);
 
 let USER_TONE = "professional";
 let MAX_LENGTH = 220;
@@ -81,10 +80,9 @@ function injectButton(commentBox) {
 }
 
 function showSuggestions(data) {
-    console.log("showSuggestions", data);
-
     // Assuming your backend returns an array of suggestions
     const suggestions = data.suggestions || [];
+    suggestions.splice(0, 1)
     if (suggestions.length === 0) {
         suggestions.push("No suggestions available.");
     }
@@ -105,12 +103,12 @@ async function suggestComment(commentBox) {
         }),
     });
     const data = await res.json();
+
     showSuggestions(data); // Implement UI to show suggestions
 }
 
 // Create the suggestion container
 function createSuggestionBox() {
-    console.log("creating suggestion box");
     const box = document.createElement("div");
     box.className = "ai-suggest-box";
     box.innerHTML = `
@@ -126,7 +124,6 @@ function createSuggestionBox() {
 }
 
 let suggestionBox = createSuggestionBox();
-console.log("🚀 ~ suggestionBox:", suggestionBox);
 
 // Render suggestions inside the box
 function renderSuggestions(suggestions, commentBox) {
@@ -142,6 +139,7 @@ function renderSuggestions(suggestions, commentBox) {
             <button data-action="insert" data-idx="${i}">Insert</button>
             </div>
             `;
+
         list.appendChild(item);
     });
 
