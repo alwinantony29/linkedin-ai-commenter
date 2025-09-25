@@ -53,7 +53,8 @@ app.post("/generate-comments", async (req, res) => {
     res.json({ suggestions });
 });
 
-app.listen(3000, () => console.log("Backend running on http://localhost:3000"));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log("Backend running on http://localhost:3000"));
 
 //     curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" \
 //   -H 'Content-Type: application/json' \
