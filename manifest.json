@@ -1,12 +1,10 @@
 {
   "manifest_version": 3,
   "name": "LinkedIn AI Commenter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Suggest thoughtful LinkedIn comments using an AI backend.",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/icon.png"
   },
   "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["https://www.linkedin.com/*", "http://localhost:3000/*"],
@@ -20,5 +18,8 @@
       "css": ["styles.css"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
 }

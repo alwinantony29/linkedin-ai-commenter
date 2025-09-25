@@ -1,0 +1,6 @@
+/* styles.css — optional additional styles */
+.ai-suggest-trigger { margin-left: 8px; padding:6px 8px; border-radius:6px; border:1px solid rgba(0,0,0,0.08); background: #f7f7f7; font-size:12px }
+.ai-suggest-box { position: fixed; right: 20px; bottom: 20px; width: 360px; max-height: 60vh; overflow:auto; background: #fff; border-radius:8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding:12px; display:none; z-index: 999999; }
+.ai-suggest-header{ font-weight:600; margin-bottom:8px }
+.ai-suggest-item{ border-top:1px solid #eee; padding:8px 0 }
+.ai-text{ white-space:pre-wrap }

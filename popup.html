@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>LinkedIn AI Commenter Settings</title>
+<style>
+body { font-family: sans-serif; padding: 12px; width: 280px; }
+label { display: block; margin: 8px 0 4px; font-size: 13px; }
+input, select { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; }
+button { margin-top: 12px; padding: 6px 12px; border: none; background:#0073b1; color: #fff; border-radius: 4px; cursor: pointer; }
+.status { margin-top: 8px; font-size: 12px; color: green; }
+</style>
+</head>
+<body>
+<h3>AI Commenter Settings</h3>
+<label for="backend">Backend URL</label>
+<input id="backend" type="text" placeholder="http://localhost:3000/generate-comments" />
+
+
+<label for="tone">Tone</label>
+<select id="tone">
+<option value="professional">Professional</option>
+<option value="casual">Casual</option>
+<option value="thought-leader">Thought Leader</option>
+</select>
+
+
+<label for="length">Max Length (chars)</label>
+<input id="length" type="number" value="220" />
+
+
+<button id="save">Save Settings</button>
+<div class="status" id="status"></div>
+
+
+<script src="popup.js"></script>
+</body>
+</html>
