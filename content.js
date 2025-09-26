@@ -1,7 +1,7 @@
 // content.js
 // Injects the UI, detects posts, extracts text and author info, and communicates with the backend.
 
-const BACKEND_URL = "http://localhost:3000/generate-comments"; // change to your deployed backend
+let BACKEND_URL = "http://localhost:3000/generate-comments"; // change to your deployed backend
 
 let USER_TONE = "professional";
 let MAX_LENGTH = 220;
@@ -73,7 +73,7 @@ function injectButton(commentBox) {
 
     btn.onclick = () => {
         lastCommentBox = commentBox;
-        suggestComment(commentBox);
+        suggestComment(commentBox, btn);
     };
 
     commentBox.parentNode.appendChild(btn);
@@ -91,20 +91,45 @@ function showSuggestions(data) {
     renderSuggestions(suggestions, lastCommentBox);
 }
 
-async function suggestComment(commentBox) {
-    const postText = getPostText(commentBox); // Implement function to fetch post text
-    const res = await fetch(BACKEND_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            postText,
-            tone: USER_TONE,
-            maxLength: MAX_LENGTH,
-        }),
-    });
-    const data = await res.json();
+async function suggestComment(commentBox, button) {
+    // Store original button state
+    const originalText = button.textContent;
+    const originalDisabled = button.disabled;
+    const originalCursor = button.style.cursor;
+    const originalBackgroundColor = button.style.backgroundColor;
 
-    showSuggestions(data); // Implement UI to show suggestions
+    try {
+        // Set loading state
+        button.disabled = true;
+        button.textContent = "Loading...";
+        button.style.cursor = "not-allowed";
+        button.style.backgroundColor = "#666";
+
+
+        const postText = getPostText(commentBox); // Implement function to fetch post text
+        const res = await fetch(BACKEND_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                postText,
+                tone: USER_TONE,
+                maxLength: MAX_LENGTH,
+            }),
+        });
+        const data = await res.json();
+
+        showSuggestions(data); // Implement UI to show suggestions
+    } catch (error) {
+        console.error("Error generating comment suggestions:", error);
+        // You could show an error message to the user here
+        alert("Failed to generate comment suggestions. Please try again.");
+    } finally {
+        // Restore original button state
+        button.disabled = originalDisabled;
+        button.textContent = originalText;
+        button.style.cursor = originalCursor;
+        button.style.backgroundColor = originalBackgroundColor;
+    }
 }
 
 // Create the suggestion container
