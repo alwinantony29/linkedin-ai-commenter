@@ -1,14 +1,13 @@
 // content.js
 // Injects the UI, detects posts, extracts text and author info, and communicates with the backend.
 
-let BACKEND_URL = "http://localhost:3000/generate-comments"; // change to your deployed backend
+const BACKEND_URL = "https://linkedin-ai-commenter-production.up.railway.app/generate-comments"; // change to your deployed backend
 
 let USER_TONE = "professional";
 let MAX_LENGTH = 220;
 
 // Load from storage
-chrome.storage.sync.get(["backendUrl", "tone", "maxLength"], (data) => {
-    if (data.backendUrl) BACKEND_URL = data.backendUrl;
+chrome.storage.sync.get(["tone", "maxLength"], (data) => {
     if (data.tone) USER_TONE = data.tone;
     if (data.maxLength) MAX_LENGTH = data.maxLength;
 });
