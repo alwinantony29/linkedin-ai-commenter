@@ -44,12 +44,12 @@ function getPostText(commentBox) {
 async function detectCommentBoxes() {
     while (true) {
         const commentBoxes = document.querySelectorAll(
-            '[contenteditable="true"], textarea'
+            '.ql-editor.ql-blank, [contenteditable="true"]:not(.ql-clipboard), textarea:not(#g-recaptcha-response-100000)'
         );
         commentBoxes.forEach((box) => {
             if (!box.dataset.aiInjected) {
-                injectButton(box);
                 box.dataset.aiInjected = true; // avoid injecting multiple times
+                injectButton(box);
             }
         });
         await wait(1500); // Check periodically
@@ -70,6 +70,7 @@ function injectButton(commentBox) {
     btn.style.border = "none";
     btn.style.backgroundColor = "#0073b1";
     btn.style.color = "#fff";
+    btn.style.minWidth = "120px";
 
     btn.onclick = () => {
         lastCommentBox = commentBox;
@@ -103,7 +104,7 @@ async function suggestComment(commentBox, button) {
         button.disabled = true;
         button.textContent = "Loading...";
         button.style.cursor = "not-allowed";
-        button.style.backgroundColor = "#666";
+
 
 
         const postText = getPostText(commentBox); // Implement function to fetch post text
