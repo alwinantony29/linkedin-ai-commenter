@@ -50,7 +50,7 @@ app.post("/generate-comments", async (req, res) => {
 
 
     // Call your LLM (OpenAI example)
-    const prompt = `Suggest 3 ${tone} LinkedIn comments under ${maxLength} characters for this post:\n"${postText}"`;
+    const prompt = `Suggest 3 ${tone} LinkedIn comments under ${maxLength} characters for this post. Do not include any hashtags in the comments.\n\nPost:\n"${postText}"`;
 
     const response = await fetch(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
